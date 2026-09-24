@@ -10,7 +10,7 @@ public class NegocioMejorado {
 	// PASO 11: dejarla como está abajo (corrección).
 	private ArrayList<Cliente> clientes = new ArrayList<>();
  
-	
+	private int ultimoCodigo = 100;
  
 	// === CONSTRUCTOR ===
  
@@ -72,5 +72,35 @@ public class NegocioMejorado {
 		return null;
 	}
  
+	// === PARTE 2: CLIENTES ===
+	 
+		public void registrarCliente(String nombre, String cedula) {
+			Cliente cliente = new Cliente(nombre, cedula);
+			cliente.setCodigo(ultimoCodigo + "");
+			ultimoCodigo++;
+			clientes.add(cliente);
+		}
+	 
+		public Cliente buscarClientePorCedula(String cedula) {
+			for (int i = 0; i < clientes.size(); i++) {
+				Cliente cliente = clientes.get(i);
+				if (cliente.getCedula().equals(cedula)) {
+					return cliente;
+				}
+			}
+			return null;
+		}
+	 
+		public Cliente buscarClientePorCodigo(String codigo) {
+			for (int i = 0; i < clientes.size(); i++) {
+				Cliente cliente = clientes.get(i);
+				if (cliente.getCodigo().equals(codigo)) {
+					return cliente;
+				}
+			}
+			return null;
+		}
+
+	
 	
 }
