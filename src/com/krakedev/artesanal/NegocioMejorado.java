@@ -101,6 +101,34 @@ public class NegocioMejorado {
 			return null;
 		}
 
+		// === PARTE 3: CONSUMO ===
+		 
+		public void consumirCerveza(String codigoCliente, String codigoMaquina, double cantidad) {
+			Maquina maquina = recuperarMaquina(codigoMaquina);
+			Cliente cliente = buscarClientePorCodigo(codigoCliente);
+	 
+			// Control de errores: si alguno no existe, no se hace nada
+			if (maquina == null || cliente == null) {
+				return;
+			}
+	 
+			double valor = maquina.servirCerveza(cantidad);
+			registrarConsumo(cliente, valor);
+		}
+	 
+		public void registrarConsumo(Cliente cliente, double valor) {
+			// Se acumula, no se reemplaza
+			cliente.setTotalConsumido(cliente.getTotalConsumido() + valor);
+		}
+	 
+		public double consultarValorVendido() {
+			double total = 0;
+			for (int i = 0; i < clientes.size(); i++) {
+				total += clientes.get(i).getTotalConsumido();
+			}
+			return total;
+		}
+
 	
 	
 }
